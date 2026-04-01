@@ -1,0 +1,460 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "@ng-select/ng-select/themes/default.theme.css";
+@import './assets/styles/apexchart.scss';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 210 40% 96%;
+    --card-foreground: 240 0% 0%;
+    --primary: 210 90% 25%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 213 27% 84%;
+    --muted-foreground: 215 16% 47%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 14.9%;
+    --primary: 347 77% 50%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+  }
+
+  :root[data-theme='violet'] {
+    --primary: 262.1 83.3% 57.8%;
+  }
+
+  .dark[data-theme='violet'] {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 20% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+  }
+
+  :root[data-theme='red'] {
+    --primary: 350 100% 40%;
+  }
+
+  .dark[data-theme='red'] {
+    --primary: 350 100% 40%;
+    --primary-foreground: 0 85.7% 97.3%;
+  }
+
+  :root[data-theme='blue'] {
+    --primary: 221.2 83.2% 53.3%;
+  }
+
+  .dark[data-theme='blue'] {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+  }
+
+  :root[data-theme='orange'] {
+    --primary: 24.6 95% 53.1%;
+  }
+
+  .dark[data-theme='orange'] {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 24 10% 7%;
+    --card-foreground: 60 9.1% 97.8%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --border: 12 6.5% 15.1%;
+  }
+
+  :root[data-theme='yellow'] {
+    --primary: 47.9 95.8% 53.1%;
+  }
+
+  .dark[data-theme='yellow'] {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 24 10% 7%;
+    --card-foreground: 60 9.1% 97.8%;
+    --primary: 47.9 95.8% 53.1%;
+    --primary-foreground: 26 83.3% 14.1%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+  }
+
+  :root[data-theme='green'] {
+    --primary: 142.1 76.2% 36.3%;
+  }
+
+  .dark[data-theme='green'] {
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+  }
+
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  
+  textarea,
+  select {
+    @apply w-full rounded-md border border-border bg-background px-3 py-3 text-xs text-foreground placeholder-muted-foreground focus:z-10 focus:border-primary focus:outline-none focus:ring-primary;
+  
+  }
+
+  [type='checkbox'],
+  [type='radio'] {
+    @apply h-4 w-4 rounded border-border bg-background text-primary focus:ring-2 focus:ring-primary;
+  }
+}
+
+@layer components {
+  .dropdown-content {
+    @apply pointer-events-none scale-95 opacity-0 duration-100 ease-in;
+  }
+
+  .dropdown:hover > .dropdown-content {
+    @apply pointer-events-auto block scale-100 animate-fade-in-up opacity-100 duration-200;
+  }
+}
+
+/** Scroll bar **/
+@supports selector(::-webkit-scrollbar) {
+  .supports-scrollbars\: pr-2 {
+    padding-right: 0.5rem;
+  }
+}
+
+
+/* styles.css or progress-bar.component.css */
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.progress-bar {
+  animation: progress linear infinite;
+}
+
+
+.disabled-section {
+  pointer-events: none;
+  opacity: 0.5; /* Puedes ajustar la opacidad según tus necesidades */
+}
+
+/* NUEVOS ESTILOS NGSELECT */
+.ng-select.ngs { position: relative; box-sizing: border-box; font-size: .875rem; line-height: 1.25rem; } /* base del host */
+
+/* Contenedor */
+.ng-select.ngs .ng-select-container{
+  @apply w-full rounded-md border border-border bg-background text-foreground; /* hereda estilos ui */
+  box-sizing: border-box;
+  min-height: 2.5rem; height: 2.5rem; /* alto uniforme con inputs */
+  border-width: 1px;
+  outline: none; box-shadow: none;
+  padding-left: .75rem; padding-right: 2rem; /* espacio para flecha */
+  transition: border-color .15s, box-shadow .15s; /* foco suave */
+}
+
+/* placeholder gris (no azul) */
+.ng-select.ngs .ng-placeholder{
+  color: hsl(var(--foreground) / 0.55) !important; /* tono atenuado */
+  font-size: .95rem; line-height: 1.5rem;
+}
+
+/* valor y búsqueda mismo tamaño/color */
+.ng-select.ngs .ng-value,
+.ng-select.ngs .ng-value-label,
+.ng-select.ngs .ng-input > input{
+  font-size: 1rem; line-height: 1.5rem; color: hsl(var(--foreground));
+}
+
+/* hover normal cuando no hay error/focus */
+.ng-select.ngs:not(.is-invalid):not(.ng-select-focused):not(.ng-select-opened):hover .ng-select-container{
+  border-color: hsl(var(--foreground));
+}
+
+/* focus/abierto azul (si no está en error) */
+.ng-select.ngs:not(.is-invalid).ng-select-focused .ng-select-container,
+.ng-select.ngs:not(.is-invalid).ng-select-opened  .ng-select-container{
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 1px hsl(var(--primary));
+}
+
+/* inválido solo si tú agregas .is-invalid */
+.ng-select.ngs.is-invalid .ng-select-container{
+  border-color: hsl(var(--destructive)) !important;
+  box-shadow: none !important; /* sin halo si no hay focus */
+}
+.ng-select.ngs.is-invalid.ng-select-focused .ng-select-container,
+.ng-select.ngs.is-invalid.ng-select-opened  .ng-select-container{
+  border-color: hsl(var(--destructive)) !important;
+  box-shadow: 0 0 0 1px hsl(var(--destructive)) !important; /* halo rojo en focus */
+}
+
+/* color de mensaje de error */
+.ngs-msg-invalid, .text-destructive{ color: hsl(var(--destructive)); }
+
+/* flecha y clear posicionados a la derecha */
+.ng-select.ngs .ng-arrow-wrapper,
+.ng-select.ngs .ng-clear-wrapper{
+  position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; width: 1.25rem;
+}
+.ng-select.ngs .ng-arrow-wrapper{ right: .5rem;   pointer-events: auto; cursor: pointer; } /* flecha */
+.ng-select.ngs .ng-clear-wrapper{ right: 2rem; } /* botón X */
+.ng-select.ngs.has-clear .ng-select-container{ padding-right: 3.25rem; } /* más padding si hay clear */
+
+/* Panel */
+.ng-dropdown-panel.ngs-panel{
+  border: 1px solid hsl(var(--border)); border-radius: .5rem;
+  background: hsl(var(--background)); color: hsl(var(--foreground));
+  box-shadow: 0 4px 8px rgba(0,0,0,.05);
+  margin-top: .25rem; font-size: .875rem; overflow: hidden; /* drop estilizado */
+}
+.ng-dropdown-panel.ngs-panel .ng-option{ color: hsl(var(--foreground)) !important; padding: .5rem .75rem; min-height: 2rem; cursor: pointer; } /* opción base */
+.ng-dropdown-panel.ngs-panel .ng-option:hover,
+.ng-dropdown-panel.ngs-panel .ng-option.ng-option-marked{ background: #f3f4f6; } /* hover/mark */
+
+/* centrado vertical estable del valor y del input de búsqueda */
+.ng-select.ngs .ng-value-container{ display: flex; align-items: center; min-height: 2.5rem; padding: 0; }
+.ng-select.ngs .ng-input{
+  position: absolute; left: .75rem; right: 2rem; top: 0; bottom: 0; display: flex; align-items: center;
+}
+.ng-select.ngs.has-clear .ng-input{ right: 3rem; } /* ajusta cuando hay X */
+.ng-select.ngs .ng-input > input{
+  margin: 0; padding: 0; height: 100%; line-height: 2.5rem; background: transparent; border: 0; /* input invisible */
+}
+
+/* quitar adornos de chips/valores */
+.ng-select.ngs .ng-value::before,
+.ng-select.ngs .ng-value::after{ content: none !important; }
+
+/* evitar que corte el panel en contenedores con overflow */
+.ng-select.ngs,
+.ng-select.ngs .ng-select-container,
+.mt-2 { overflow: visible; } /* panel puede sobresalir */
+
+/* Estilos Botones Listado Gerencionamiento */
+.glass-btn {
+  @apply relative inline-flex items-center justify-center
+         h-10 px-4 rounded-lg font-medium text-sm
+         border transition-all duration-300 ease-out
+         select-none outline-none;
+}
+
+/* --- Azul (usa tu --primary) --- */
+.glass-primary {
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border-color: hsl(var(--primary) / 0.35);
+}
+.glass-primary.glass-active {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--primary));
+  @apply shadow-md;
+}
+
+/* --- Verde --- */
+.glass-success {
+  background-color: hsl(142.1 76.2% 36.3% / 0.1);
+  color: hsl(142.1 76.2% 36.3%);
+  border-color: hsl(95 90% 40%);
+}
+.glass-success.glass-active {
+  background-color: hsl(142.1 76.2% 36.3%);
+  color: #fff;
+  border-color: hsl(95 90% 40%);
+  @apply shadow-md;
+}
+
+/* --- Rojo (usa tu --destructive) --- */
+.glass-error {
+  background-color: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive));
+  border-color: hsl(var(--destructive) / 0.35);
+}
+.glass-error.glass-active {
+  background-color: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+  border-color: hsl(var(--destructive));
+  @apply shadow-md;
+}
+/* --- Naranja --- */
+.glass-orange {
+  /* naranja soft */
+  background-color: hsl(24.6 95% 53.1% / 0.10);
+  color: hsl(25, 90%, 55%);
+  border-color: hsla(25, 58%, 94%, 0.35);
+}
+.glass-orange.glass-active {
+  /* naranja sólido */
+  background-color: hsl(25, 87%, 58%);
+  color: #fff;
+  border-color: hsl(25, 71%, 64%);
+  @apply shadow-md;
+}
+/* Focus accesible */
+.glass-btn:focus-visible { @apply ring-2 ring-offset-0; }
+.glass-primary:focus-visible { @apply ring-[hsl(var(--primary)/.4)]; }
+.glass-success:focus-visible { @apply ring-green-400; }
+.glass-error:focus-visible   { @apply ring-rose-400; }
+
+/* ===== Hover/Elevación glass (genérico) ===== */
+.glass-btn {
+  will-change: transform, box-shadow, background-color, border-color;
+}
+.glass-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+.glass-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* Brillo diagonal sutil */
+.glass-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255,255,255,.18), rgba(255,255,255,0) 40%);
+  opacity: .0;
+  transition: opacity .25s ease, transform .25s ease;
+  transform: translateX(-10%);
+  pointer-events: none;
+}
+.glass-btn:hover::before {
+  opacity: .65;
+  transform: translateX(0%);
+}
+
+.glass-primary:hover { 
+  background-color: hsl(var(--primary) / 0.15);
+  border-color: hsl(var(--primary) / 0.45);
+}
+.glass-success:hover {
+  background-color: hsl(142.1 76.2% 36.3% / 0.15);
+  border-color: hsl(95 90% 40% / 0.9);
+}
+.glass-error:hover {
+  background-color: hsl(var(--destructive) / 0.15);
+  border-color: hsl(var(--destructive) / 0.45);
+}
+
+.glass-primary.glass-active {
+  background-color: hsl(var(--primary) ); 
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--primary));
+  @apply shadow-md;
+}
+
+.glass-success.glass-active {
+  background-color: hsl(142.1 76.2% 36.3% / 0.85);
+  color: #fff;
+  border-color: hsl(142.1 76.2% 36.3%);
+  @apply shadow-md;
+}
+
+.glass-error.glass-active {
+  background-color: hsl(var(--destructive) / 0.85);
+  color: hsl(var(--destructive-foreground));
+  border-color: hsl(var(--destructive));
+  @apply shadow-md;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-btn, .glass-btn::before {
+    transition: none;
+  }
+}
+.btn-excel {
+  background-color: #207345 !important;
+  border-color: #207345 !important;
+  color: #fff !important;
+}
+.btn-excel:hover,
+.btn-excel:focus {
+  background-color: #1b5c39 !important;
+  border-color: #1b5c39 !important;
+  color: #fff !important;
+}
+.filter-grid > * { min-width: 0; } 
+
+.btn-compact {
+  height: 2.25rem;        /* ~ h-9 */
+  padding: 0 0.5rem;      /* ~ px-2 */
+  font-size: .8125rem;    /* ~ text-sm reducido */
+  line-height: 1;         /* texto más ceñido */
+}
+
+.glass-neutral {
+  @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+}
+.glass-neutral.glass-active {
+  @apply bg-gray-300 text-black;
+}
+.input {
+  @apply bg-white border border-gray-300 text-gray-900 placeholder-gray-400 transition;
+}
+.dark .input {
+  @apply bg-gray-800 border-gray-600 text-gray-100 placeholder-gray-500;
+}
+.badge-orange-soft {
+  @apply bg-orange-200 text-orange-600 rounded-full;
+}
+/* Cuando el option seleccionado es el placeholder (disabled) → texto gris */
+select.input:has(option:checked[disabled]) {
+  color: #9CA3AF; /* gray-400 */
+}
+/* Asegura que las opciones del desplegable salgan normales */
+select.input option {
+  color: #111827; /* gray-900 */
+}
+select.input option[disabled] {
+  color: #9CA3AF; /* placeholder en el menú */
+}
+select.input:has(option:checked[disabled]):hover {
+  color: #111827; /* gray-900 */
+}
