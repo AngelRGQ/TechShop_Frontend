@@ -1,0 +1,1 @@
+export type { UsuarioSesion } from '../../../../../core/models/auth/usuario-sesion.model';

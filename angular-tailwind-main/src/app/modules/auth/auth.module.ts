@@ -1,17 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { HttpClientModule } from '@angular/common/http';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 import { AuthRoutingModule } from './auth-routing.module';
-import { AuthComponent } from './auth.component';
-
 
 @NgModule({
-  declarations: [
-    AuthComponent
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule
-  ]
+  imports: [AuthRoutingModule, HttpClientModule, AngularSvgIconModule.forRoot()],
 })
-export class AuthModule { }
+export class AuthModule {}

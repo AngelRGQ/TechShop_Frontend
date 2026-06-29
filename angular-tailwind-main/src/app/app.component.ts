@@ -12,7 +12,6 @@ declare global {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [NgClass, RouterOutlet, ResponsiveHelperComponent],
 })

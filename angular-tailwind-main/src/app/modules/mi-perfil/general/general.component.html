@@ -1,0 +1,81 @@
+<section class="p-6">
+  <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <h2 class="text-xl font-bold text-slate-900">Informacion general</h2>
+    <p class="mt-1 text-sm text-slate-500">Resumen del usuario autenticado en TechShop.</p>
+
+    <div *ngIf="loading" class="mt-4 text-sm text-slate-500">
+      Cargando perfil...
+    </div>
+
+    <div *ngIf="error" class="mt-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-700">
+      {{ error }}
+    </div>
+
+    <div *ngIf="mensaje" class="mt-4 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+      {{ mensaje }}
+    </div>
+
+    <form *ngIf="perfil && !loading" class="mt-6 grid gap-4" (ngSubmit)="guardar()">
+      <div class="rounded-lg bg-slate-50 p-4">
+        <label class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Nombre</label>
+        <input
+          [(ngModel)]="nombre"
+          name="nombre"
+          type="text"
+          class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
+        />
+      </div>
+
+      <div class="rounded-lg bg-slate-50 p-4">
+        <label class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Celular</label>
+        <input
+          [(ngModel)]="celular"
+          name="celular"
+          type="tel"
+          class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900"
+        />
+      </div>
+
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          [disabled]="saving"
+          class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
+          {{ saving ? 'Guardando...' : 'Guardar cambios' }}
+        </button>
+      </div>
+    </form>
+
+    <dl *ngIf="perfil && !loading" class="mt-6 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-lg bg-slate-50 p-4">
+        <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Nombre</dt>
+        <dd class="mt-1 text-sm font-medium text-slate-900">{{ perfil.nombre }}</dd>
+      </div>
+
+      <div class="rounded-lg bg-slate-50 p-4">
+        <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Email</dt>
+        <dd class="mt-1 text-sm font-medium text-slate-900">{{ perfil.email }}</dd>
+      </div>
+
+      <div class="rounded-lg bg-slate-50 p-4">
+        <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Cedula</dt>
+        <dd class="mt-1 text-sm font-medium text-slate-900">{{ perfil.cedula || 'Sin registrar' }}</dd>
+      </div>
+
+      <div class="rounded-lg bg-slate-50 p-4">
+        <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Celular</dt>
+        <dd class="mt-1 text-sm font-medium text-slate-900">{{ perfil.celular || 'Sin registrar' }}</dd>
+      </div>
+
+      <div class="rounded-lg bg-slate-50 p-4">
+        <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Rol</dt>
+        <dd class="mt-1 text-sm font-medium text-slate-900">{{ perfil.rol }}</dd>
+      </div>
+
+      <div class="rounded-lg bg-slate-50 p-4">
+        <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Estado</dt>
+        <dd class="mt-1 text-sm font-medium text-slate-900">{{ perfil.activo ? 'Activo' : 'Inactivo' }}</dd>
+      </div>
+    </dl>
+  </div>
+</section>

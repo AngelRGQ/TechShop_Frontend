@@ -1,1 +1,25 @@
-<p>auth works!</p>
+<div class="flex h-screen w-screen">
+  <div class="auth-bg hidden flex-1 items-center justify-center bg-primary bg-cover lg:flex">
+    <div class="w-full h-screen bg-no-repeat bg-center text-center text-white">
+    </div>
+
+    <!-- <div class="w-full h-screen max-h-full overflow-hidden p-2 text-center text-white">
+      <img src="./assets/images/banner1.png" alt="dashboard widget" class="w-full h-full object-cover" />
+    </div> -->
+  </div>
+  <div class="flex flex-1 items-center justify-center bg-background">
+    <div class="max-w-md overflow-y-auto px-4 sm:w-[500px]">
+      <!-- logo -->
+      <div class="flex items-center justify-center">
+       
+          <div class="flex items-center justify-center">
+            <img src="" alt="dashboard widget" class="h-16" />
+          </div>
+    
+     
+      </div>
+      <!-- Route -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

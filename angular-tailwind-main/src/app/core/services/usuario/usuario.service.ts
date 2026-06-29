@@ -1,91 +1,41 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, } from '@angular/core';
-//import { environment } from 'src/app/core/constants/global';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-//import { PeticionesService } from '../../constants/peticiones';
-
-
-import { EntidadRespuesta } from '../../models/EntidadRespuesta';
-import { EntidadBusqueda } from '../../models/EntidadBusqueda';
-
+import { Observable } from 'rxjs';
+import { UsuarioSesion } from '../../models/auth/usuario-sesion.model';
+import { ApiResponse } from '../../models/shared/api-response.model';
+import { PeticionesService } from '../http/peticiones.service';
+import { SessionService } from '../session/session.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  public identity?: any;
-  public token: any;
+  constructor(
+    private router: Router, 
+    private peticiones: PeticionesService,
+    private sessionService: SessionService
+  ) { }
 
-  constructor(public router: Router, private http: HttpClient, public peticiones: PeticionesService) { }
-
-
-  autenticarUsuario(usuario: any, getHash: string) {
-    if (getHash) {
-      usuario.getHash = getHash;
-    }
-    let params = JSON.stringify(usuario);
-    return this.peticiones.ejecutarQueryPost<EntidadRespuesta>(`autenticarUsuario`, params)
-  }
-  obtenerUsuarioLicencias(idUsuario: number) {
-    return this.peticiones.ejecutarQueryGet<EntidadRespuesta>(`obtenerUsuarioLicencias/${idUsuario}`)
+  obtenerPerfil(): Observable<ApiResponse<UsuarioSesion>> {
+    // Nota: Backend debe implementar GET /api/auth/perfil
+    // Actualmente se asume que devuelve los datos del usuario del token
+    return this.peticiones.get<ApiResponse<UsuarioSesion>>('/auth/perfil');
   }
 
-  listarAreas() {
-    return this.peticiones.ejecutarQueryGet<EntidadRespuesta>(`listarAreas`)
+  listarUsuariosSistema(): Observable<ApiResponse<UsuarioSesion[]>> {
+    return this.peticiones.get<ApiResponse<UsuarioSesion[]>>('/auth/usuarios');
   }
 
-  obtenerAreas() {
-    return this.peticiones.ejecutarQueryGet<EntidadRespuesta>(`obtenerAreas`)
+  actualizarPerfil(payload: { nombre: string; celular: string }): Observable<ApiResponse<UsuarioSesion>> {
+    return this.peticiones.put<ApiResponse<UsuarioSesion>>('/auth/perfil', payload);
   }
 
-  listarUsuariosActivosTarjetas() {
-    return this.peticiones.ejecutarQueryGet<EntidadRespuesta>(`listarUsuariosActivosTarjetas`)
+  cambiarPassword(payload: { passwordActual: string; passwordNuevo: string }): Observable<ApiResponse<null>> {
+    return this.peticiones.post<ApiResponse<null>>('/auth/password', payload);
   }
 
-  obtenerMiUsuario(idUsuario: number) {
-    return this.peticiones.ejecutarQueryGet<EntidadRespuesta>(`obtenerMiUsuario/${idUsuario}`)
-  }
-
-
-  actualizarContrasenia(idUsuario: number, contrasenia: any) {
-    let params = JSON.stringify(contrasenia);
-    console.log("entere actuaizar")
-    return this.peticiones.ejecutarQueryPut<EntidadRespuesta>(`actualizarContrasenia/${idUsuario}`, params)
-  }
-
-
-  actualizarEstadoLicencia(idLicencia:number,obj:any) {
-    let params = JSON.stringify(obj);
-    return this.peticiones.ejecutarQueryPut<EntidadRespuesta>(`actualizarEstadoLicencia/${idLicencia}`, params)
-  }
-
-  getIdentity() {
-    let identity = localStorage.getItem("IdentityTarjetasStop");
-    if (identity != "undefined") {
-      this.identity = identity;
-    } else {
-      this.identity = null;
-    }
-    return this.identity;
-  }
-
-  getToken() {
-    let token = localStorage.getItem("TokenTarjetasStop");
-    if (token != "undefined") {
-      this.token = token;
-    } else {
-      this.token = null;
-    }
-    return this.token;
-  }
-
-
-  async salir() {
-    debugger;
-    localStorage.removeItem("IdentityTarjetasStop");
-    localStorage.removeItem("TokenTarjetasStop");
-    localStorage.clear();
-    this.identity = null;
-    this.token = null;
+  salir(): void {
+    this.sessionService.clearSession();
+    this.router.navigate(['/auth/login']);
   }
 }

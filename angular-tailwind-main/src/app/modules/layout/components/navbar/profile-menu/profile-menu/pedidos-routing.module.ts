@@ -1,0 +1,1 @@
+export { PedidosRoutingModule } from '../../../../../pedidos/pedidos-routing.module';

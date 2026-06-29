@@ -1,17 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { ErrorRoutingModule } from './error-routing.module';
-import { ErrorComponent } from '../error.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
-  declarations: [
-    ErrorComponent
-  ],
-  imports: [
-    CommonModule,
-    ErrorRoutingModule
-  ]
+  declarations: [],
+  imports: [ErrorRoutingModule, HttpClientModule, AngularSvgIconModule.forRoot()],
 })
-export class ErrorModule { }
+export class ErrorModule {}

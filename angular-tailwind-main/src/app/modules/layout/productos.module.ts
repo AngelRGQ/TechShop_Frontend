@@ -1,0 +1,1 @@
+export { ProductosModule } from '../productos/productos.module';

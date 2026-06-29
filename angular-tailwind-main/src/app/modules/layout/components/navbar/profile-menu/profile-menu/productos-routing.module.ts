@@ -1,0 +1,1 @@
+export { ProductosRoutingModule } from '../../../../../productos/productos-routing.module';

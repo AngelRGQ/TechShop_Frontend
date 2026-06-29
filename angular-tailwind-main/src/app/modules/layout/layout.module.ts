@@ -1,17 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { LayoutRoutingModule } from './layout-routing.module';
-import { LayoutComponent } from './layout.component';
-
-
 @NgModule({
-  declarations: [
-    LayoutComponent
-  ],
-  imports: [
-    CommonModule,
-    LayoutRoutingModule
-  ]
+  imports: [LayoutRoutingModule, HttpClientModule, AngularSvgIconModule.forRoot()],
 })
-export class LayoutModule { }
+export class LayoutModule {}

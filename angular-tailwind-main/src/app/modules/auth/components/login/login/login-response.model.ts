@@ -1,0 +1,1 @@
+export type { LoginResponse } from '../../../../../core/models/auth/login-response.model';

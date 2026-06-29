@@ -1,0 +1,1 @@
+export { PeticionesService } from '../../core/services/http/peticiones.service';
